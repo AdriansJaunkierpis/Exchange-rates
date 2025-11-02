@@ -43,6 +43,7 @@ public class FxRatesService {
 
             List<FxRateEntity> entities = fxRates.getFxRates().stream()
                     .flatMap(fxRate -> fxRate.getCcyAmts().stream())
+                    .filter(ccyAmt -> !"EUR".equals(ccyAmt.getCurrency()))
                     .map(ccyAmt -> new FxRateEntity(
                             ccyAmt.getCurrency(),
                             Double.parseDouble(ccyAmt.getAmount()),
