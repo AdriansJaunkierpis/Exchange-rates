@@ -1,0 +1,16 @@
+<h2>Today's FX Rates</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Currency</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rate of rates">
+      <td>{{ rate.currency }}</td>
+      <td>{{ rate.rate | number:'1.4-4' }}</td>
+    </tr>
+  </tbody>
+</table>
