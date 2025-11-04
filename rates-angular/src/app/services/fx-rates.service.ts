@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface FxRate {
   currency: string;
   rate: number;
+  date: string;
 }
 
 @Injectable({
@@ -17,5 +18,9 @@ export class FxRatesService {
 
   getTodayRates(): Observable<FxRate[]> {
     return this.http.get<FxRate[]>(this.apiUrl);
+  }
+
+  getCurrencyHistory(currency: string): Observable<FxRate[]> {
+    return this.http.get<FxRate[]>(`${this.apiUrl}/${currency}/history`);
   }
 }

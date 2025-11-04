@@ -9,7 +9,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let rate of rates">
-      <td>{{ rate.currency }}</td>
+      <td>
+        <a [routerLink]="['/rates', rate.currency]">{{ rate.currency }}</a>
+      </td>
       <td>{{ rate.rate | number:'1.4-4' }}</td>
     </tr>
   </tbody>

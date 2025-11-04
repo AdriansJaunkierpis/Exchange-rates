@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface FxRateRepository extends JpaRepository<FxRateEntity, Long> {
     List<FxRateEntity> findByDate(LocalDate date);
+
+    List<FxRateEntity> findByCurrencyAndDateBetweenOrderByDateAsc(String currency, LocalDate startDate, LocalDate endDate);
 }

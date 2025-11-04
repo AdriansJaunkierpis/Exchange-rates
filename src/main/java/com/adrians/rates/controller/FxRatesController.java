@@ -4,10 +4,7 @@ import com.adrians.rates.entity.FxRateEntity;
 import com.adrians.rates.model.FxRates;
 import com.adrians.rates.service.FxRatesService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,11 @@ public class FxRatesController {
     public ResponseEntity<List<FxRateEntity>> getCurrentFxRates() {
         List<FxRateEntity> rates = fxRatesService.getCurrentFxRates();
         return ResponseEntity.ok(rates);
+    }
+
+    @GetMapping("/{currency}/history")
+    public ResponseEntity<List<FxRateEntity>> getCurrencyHistory(@PathVariable String currency) {
+        List<FxRateEntity> history = fxRatesService.getFxRatesForCurrency(currency);
+        return ResponseEntity.ok(history);
     }
 }

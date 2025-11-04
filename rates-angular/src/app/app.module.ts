@@ -5,15 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FxRateListComponent } from './components/fx-rate-list/fx-rate-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FxRateHistoryComponent } from './components/fx-rate-history/fx-rate-history.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FxRateListComponent
+    FxRateListComponent,
+    FxRateHistoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],
