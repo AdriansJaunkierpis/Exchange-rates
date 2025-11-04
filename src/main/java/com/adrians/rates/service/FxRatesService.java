@@ -69,7 +69,7 @@ public class FxRatesService {
         LocalDate startDate = LocalDate.now().minusDays(90);
         LocalDate endDate = LocalDate.now();
 
-        return fxRateRepository.findByCurrencyAndDateBetweenOrderByDateAsc(currency.toUpperCase(), startDate, endDate);
+        return fxRateRepository.findByCurrencyAndDateBetweenOrderByDateDesc(currency.toUpperCase(), startDate, endDate);
     }
 
     private List<FxRateEntity> fetchAndSaveRatesForDate(LocalDate date, String url) throws Exception {
