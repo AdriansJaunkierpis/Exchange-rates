@@ -1,0 +1,17 @@
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 60%;
+  max-width: 500px;
+}
+
+.rates-table td,
+.rates-table th {
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.rates-table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
