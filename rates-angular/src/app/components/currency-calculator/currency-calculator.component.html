@@ -1,0 +1,31 @@
+<div class="calc-container">
+  <h2>Currency Calculator</h2>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <form *ngIf="!error" (ngSubmit)="calculate()" class="calc-form">
+    <div class="form-group">
+      <label for="amount">Amount in EUR:</label>
+      <input id="amount" type="number" [(ngModel)]="amountEur" name="amountEur" required />
+    </div>
+
+    <div class="form-group">
+      <label for="currency">Select currency:</label>
+      <select id="currency" [(ngModel)]="currency" name="currency" required>
+        <option value="" disabled selected>Select...</option>
+        <option *ngFor="let rate of rates" [value]="rate.currency">{{ rate.currency }}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!amountEur || !currency">Convert</button>
+  </form>
+
+  <div *ngIf="amountConverted" class="result">
+    <h3>Result:</h3>
+    <p>
+      {{ amountEur }} EUR = 
+      <strong>{{ amountConverted | number:'1.2-2' }} {{ currency }}</strong>
+    </p>
+    <p>Rate used: 1 EUR = {{ rateUsed | number:'1.4-4' }} {{ currency }}</p>
+  </div>
+</div>

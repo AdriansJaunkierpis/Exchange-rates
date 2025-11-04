@@ -7,12 +7,14 @@ import { FxRateListComponent } from './components/fx-rate-list/fx-rate-list.comp
 import { HttpClientModule } from '@angular/common/http';
 import { FxRateHistoryComponent } from './components/fx-rate-history/fx-rate-history.component';
 import { FormsModule } from '@angular/forms';
+import { CurrencyCalculatorComponent } from './components/currency-calculator/currency-calculator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FxRateListComponent,
-    FxRateHistoryComponent
+    FxRateHistoryComponent,
+    CurrencyCalculatorComponent
   ],
   imports: [
     BrowserModule,
