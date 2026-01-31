@@ -2,7 +2,9 @@ package com.adrians.rates.schedule;
 
 import com.adrians.rates.service.FxRatesService;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FxRatesScheduler {
     private final FxRatesService fxRatesService;
 

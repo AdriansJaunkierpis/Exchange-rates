@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -86,7 +87,7 @@ public class FxRatesService {
                 .filter(ccyAmt -> !"EUR".equals(ccyAmt.getCurrency()))
                 .map(ccyAmt -> new FxRateEntity(
                         ccyAmt.getCurrency(),
-                        Double.parseDouble(ccyAmt.getAmount()),
+                        new BigDecimal(ccyAmt.getAmount()),//Double.parseDouble(ccyAmt.getAmount()),
                         date
                 ))
                 .collect(Collectors.toList());
