@@ -24,10 +24,10 @@ public class FxRatesService {
     private final RestClient restClient;
     private final XmlMapper xmlMapper;
 
-    public FxRatesService(FxRateRepository fxRateRepository) {
+    public FxRatesService(FxRateRepository fxRateRepository, RestClient restClient, XmlMapper xmlMapper) {
         this.fxRateRepository = fxRateRepository;
-        this.restClient = RestClient.builder().build();
-        this.xmlMapper = new XmlMapper();
+        this.restClient = restClient;
+        this.xmlMapper = xmlMapper;
     }
 
     @PostConstruct
