@@ -1,6 +1,7 @@
 package com.adrians.rates.service;
 
 import com.adrians.rates.entity.FxRateEntity;
+import com.adrians.rates.error.FxRateFetchException;
 import com.adrians.rates.model.FxRates;
 import com.adrians.rates.repository.FxRateRepository;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -62,7 +63,7 @@ public class FxRatesService {
         try {
             return fetchAndSaveRatesForDate(today, CURRENT_RATES_URL);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get exchange rates: " + e.getMessage(), e);
+            throw new FxRateFetchException("Failed to get exchange rates", e);
         }
     }
 

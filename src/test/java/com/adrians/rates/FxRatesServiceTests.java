@@ -42,4 +42,5 @@ public class FxRatesServiceTests {
         assertThat(result).hasSize(1);
         verifyNoInteractions(restClient);
     }
+
 }
