@@ -1,5 +1,6 @@
 package com.adrians.rates;
 
+import com.adrians.rates.dto.FxRateResponse;
 import com.adrians.rates.entity.FxRateEntity;
 import com.adrians.rates.repository.FxRateRepository;
 import com.adrians.rates.service.FxRatesService;
@@ -38,7 +39,7 @@ public class FxRatesServiceTests {
 
         when(repository.findByDate(today)).thenReturn(existing);
 
-        List<FxRateEntity> result = service.getCurrentFxRates();
+        List<FxRateResponse> result = service.getCurrentFxRates();
         assertThat(result).hasSize(1);
         verifyNoInteractions(restClient);
     }

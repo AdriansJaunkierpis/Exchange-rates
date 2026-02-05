@@ -1,6 +1,7 @@
 package com.adrians.rates;
 
 import com.adrians.rates.controller.FxRatesController;
+import com.adrians.rates.dto.FxRateResponse;
 import com.adrians.rates.entity.FxRateEntity;
 import com.adrians.rates.error.FxRateFetchException;
 import com.adrians.rates.service.FxRatesService;
@@ -34,7 +35,7 @@ public class FxRatesControllerTests {
     void shouldReturnCurrentRates() throws Exception {
         LocalDate now = LocalDate.now();
 
-        List<FxRateEntity> rates = List.of(new FxRateEntity("USD", new BigDecimal("1.08"), now));
+        List<FxRateResponse> rates = List.of(new FxRateResponse("USD", new BigDecimal("1.08"), now));
 
         when(fxRatesService.getCurrentFxRates()).thenReturn(rates);
 

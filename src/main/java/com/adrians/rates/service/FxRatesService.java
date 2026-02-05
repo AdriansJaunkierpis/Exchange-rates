@@ -1,5 +1,6 @@
 package com.adrians.rates.service;
 
+import com.adrians.rates.dto.FxRateResponse;
 import com.adrians.rates.entity.FxRateEntity;
 import com.adrians.rates.error.FxRateFetchException;
 import com.adrians.rates.model.FxRates;
@@ -52,26 +53,35 @@ public class FxRatesService {
         System.out.println("Finished populating FX rates for the last 90 days.");
     }
 
-    public List<FxRateEntity> getCurrentFxRates() {
+    public List<FxRateResponse> getCurrentFxRates() {
         LocalDate today = LocalDate.now();
 
         List<FxRateEntity> existingRates = fxRateRepository.findByDate(today);
         if (!existingRates.isEmpty()) {
-            return existingRates;
+            return existingRates
+                    .stream()
+                    .map(this::toDto)
+                    .toList();
         }
 
         try {
-            return fetchAndSaveRatesForDate(today, CURRENT_RATES_URL);
+            return fetchAndSaveRatesForDate(today, CURRENT_RATES_URL)
+                    .stream()
+                    .map(this::toDto)
+                    .toList();
         } catch (Exception e) {
             throw new FxRateFetchException("Failed to get exchange rates", e);
         }
     }
 
-    public List<FxRateEntity> getFxRatesForCurrency(String currency) {
+    public List<FxRateResponse> getFxRatesForCurrency(String currency) {
         LocalDate startDate = LocalDate.now().minusDays(90);
         LocalDate endDate = LocalDate.now();
 
-        return fxRateRepository.findByCurrencyAndDateBetweenOrderByDateDesc(currency.toUpperCase(), startDate, endDate);
+        return fxRateRepository.findByCurrencyAndDateBetweenOrderByDateDesc(currency.toUpperCase(), startDate, endDate)
+                .stream()
+                .map(this::toDto)
+                .toList();
     }
 
     private List<FxRateEntity> fetchAndSaveRatesForDate(LocalDate date, String url) throws Exception {
@@ -94,5 +104,13 @@ public class FxRatesService {
                 .collect(Collectors.toList());
 
         return fxRateRepository.saveAll(entities);
+    }
+
+    private FxRateResponse toDto(FxRateEntity entity) {
+        return new FxRateResponse(
+                entity.getCurrency(),
+                entity.getRate(),
+                entity.getDate()
+        );
     }
 }

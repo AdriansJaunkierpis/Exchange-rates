@@ -1,5 +1,6 @@
 package com.adrians.rates.controller;
 
+import com.adrians.rates.dto.FxRateResponse;
 import com.adrians.rates.entity.FxRateEntity;
 import com.adrians.rates.model.FxRates;
 import com.adrians.rates.service.FxRatesService;
@@ -20,14 +21,14 @@ public class FxRatesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FxRateEntity>> getCurrentFxRates() {
-        List<FxRateEntity> rates = fxRatesService.getCurrentFxRates();
+    public ResponseEntity<List<FxRateResponse>> getCurrentFxRates() {
+        List<FxRateResponse> rates = fxRatesService.getCurrentFxRates();
         return ResponseEntity.ok(rates);
     }
 
     @GetMapping("/{currency}/history")
-    public ResponseEntity<List<FxRateEntity>> getCurrencyHistory(@PathVariable String currency) {
-        List<FxRateEntity> history = fxRatesService.getFxRatesForCurrency(currency);
+    public ResponseEntity<List<FxRateResponse>> getCurrencyHistory(@PathVariable String currency) {
+        List<FxRateResponse> history = fxRatesService.getFxRatesForCurrency(currency);
         return ResponseEntity.ok(history);
     }
 }
