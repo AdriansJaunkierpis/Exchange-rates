@@ -7,6 +7,9 @@ import com.adrians.rates.model.FxRates;
 import com.adrians.rates.repository.FxRateRepository;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import jakarta.annotation.PostConstruct;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -32,7 +35,8 @@ public class FxRatesService {
         this.xmlMapper = xmlMapper;
     }
 
-    @PostConstruct
+    @Async
+    @EventListener(ApplicationReadyEvent.class)
     public void initializeRates() {
         if (fxRateRepository.count() == 0) {
             populatePastRates(90);
